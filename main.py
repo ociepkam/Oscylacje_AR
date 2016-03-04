@@ -54,7 +54,13 @@ class Figure:
         return "{} {} {} {} {}".format(self.number, self.rotation, self.brightness, self.frame, self.elements_changed)
 
     def return_parameters(self):
-        return [self.number, self.rotation, self.brightness, self.frame, self.elements_changed]
+        return {
+            "figure": self.number,
+            "rotation": ROTATION[self.rotation],
+            "brightness": BRIGHTNESS[self.brightness],
+            "frame": FRAME[self.frame],
+            "elements_changed": self.elements_changed
+        }
 
     def change_rotation(self):
         self.rotation = (self.rotation + self.rotation_possible_change)
