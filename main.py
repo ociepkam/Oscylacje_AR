@@ -14,6 +14,11 @@ PARAMETERS_DICT = {'rotation': ROTATION, 'brightness': BRIGHTNESS, 'frame': FRAM
 CHANGES_LVL = [-2, -1, 1, 2]
 
 
+class Instruction_type (Enum):
+    text = "text"
+    image = "image"
+
+
 class Per(Enum):
     small = (2, 2)
     big = (3, 2)
@@ -78,8 +83,9 @@ class Figure:
             self.change_frame()
 
     def change_parameters(self, elements_to_change):
-        parameters = PARAMETERS
+        parameters = copy.deepcopy(PARAMETERS)
         random.shuffle(parameters)
+
         for idx in range(elements_to_change):
             self.change_parameter(parameters[idx])
 
@@ -128,7 +134,7 @@ class Matrix:
         figure_parameters = random.choice(changes_2_or_shorter)
         parameter_to_change = random.choice(figure_parameters)
 
-        possible_new_parameters = PARAMETERS
+        possible_new_parameters = copy.deepcopy(PARAMETERS)
         for parameter, _ in figure_parameters:
             possible_new_parameters.remove(parameter)
 
@@ -312,7 +318,7 @@ class Trial:
         self.matrix_d6.name = "D6"
         self.matrix_d6.shuffle_matrix()
 
-    def prepare_trial(self):
+    def prepare(self):
         trial_info = {
             "type": self.type,
             "time": self.time,
@@ -334,7 +340,7 @@ class Instruction:
         self.time = time
         self.type = "instruction"
 
-    def prepare_instruction(self):
+    def prepare(self):
         instruction_info = {
             "type": self.type,
             "time": self.time,
@@ -364,27 +370,47 @@ class Block:
                     self.list_of_experiment_elements[idx] = experiment_elements_to_randomize[i]
                     i += 1
 
-    def prepare_block(self):
+    def prepare(self):
+        elements_list = []
+        for element in self.list_of_experiment_elements:
+            elements_list.append(element.prepare())
+
         block_info = {
             "rand": self.rand,
-            "experiment_elements": self.list_of_experiment_elements
+            "experiment_elements": elements_list
         }
         return block_info
 
 
 class Experiment:
     def __init__(self, list_of_blocks, id, sex, age):
-        self.name = id + sex + age
+        self.name = str(id) + sex + str(age)
         self.list_of_blocks = list_of_blocks
 
-    def prepare_experiment(self):
-        instruction_info = {
+    def prepare(self):
+        elements_list = []
+        for element in self.list_of_blocks:
+            elements_list.append(element.prepare())
+        info = {
             "name": self.name,
-            "list_of_blocks": self.list_of_blocks
+            "list_of_blocks": elements_list
         }
-        return instruction_info
+        return info
+
+    def save(self):
+        info = self.prepare()
+        with open(self.name + ".yaml", 'w') as save_file:
+            save_file.write(yaml.dump(info))
+
 
 trial = Trial(0, Per.small, 2, 0, 0, 0)
+trial2 = Trial(12, Per.small, 2, 1, 5, 1)
+instrukcja = Instruction("instrukcja.yaml", Instruction_type.text, 3)
+blok = Block(False, [instrukcja, trial, trial2])
+eksperyment = Experiment([blok], "as", "K", 25)
+print eksperyment.prepare()
+eksperyment.save()
+
 # print trial.matrix_a
 # print trial.matrix_b
 # print trial.matrix_c
@@ -396,7 +422,10 @@ trial = Trial(0, Per.small, 2, 0, 0, 0)
 # print trial.matrix_d5
 # print trial.matrix_d6
 
-print trial.prepare_trial()
+#print trial.prepare_trial()
+
+
+
 
 """
 TODO:
