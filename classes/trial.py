@@ -1,8 +1,9 @@
-import random
 import copy
+import random
+
+from matrix import Matrix
 from parameters import FIGURES, FRAME_CHANGES_PAIRS, BRIGHTNESS_CHANGES_PAIRS, ROTATION_CHANGES_PAIRS
 from figure import Figure
-from matrix import Matrix
 
 
 class Trial:

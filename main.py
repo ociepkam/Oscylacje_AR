@@ -1,11 +1,10 @@
 __author__ = 'Michal Ociepka'
 
-from parameters import Instruction_type, Per
-from trial import Trial
-from instruction import Instruction
-from block import Block
-from experiment import Experiment
-
+from classes.block import Block
+from classes.experiment import Experiment
+from classes.instruction import Instruction
+from classes.parameters import Instruction_type, Per
+from classes.trial import Trial
 
 trial = Trial(0, Per.small, 2, 0, 0, 0)
 trial2 = Trial(12, Per.small, 2, 1, 5, 1)

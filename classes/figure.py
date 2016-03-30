@@ -1,5 +1,6 @@
-import random
 import copy
+import random
+
 from parameters import ROTATION, BRIGHTNESS, FRAME, PARAMETERS
 
 
