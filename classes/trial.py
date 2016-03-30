@@ -7,7 +7,7 @@ from figure import Figure
 
 
 class Trial:
-    def __init__(self, time, per, rel, feedb, wait, exp):
+    def __init__(self, time, per, rel, feedb, wait, exp, tip, tip_time):
         self.type = 'trial'
         self.time = time
         self.per = per
@@ -19,6 +19,8 @@ class Trial:
         self.figures = FIGURES
         random.shuffle(self.figures)
         self.list_of_changes = []
+        self.tip = tip
+        self.tip_time = tip_time
 
         self.matrix_list = None
         self.matrix_a = None
@@ -144,6 +146,8 @@ class Trial:
             "feedb": self.feedb,
             "wait": self.wait,
             "exp": self.exp,
-            "matrix_info": self.matrix_list
+            "matrix_info": self.matrix_list,
+            "tip": self.tip,
+            "tip_time": self.tip_time
         }
         return trial_info
