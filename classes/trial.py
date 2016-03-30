@@ -141,7 +141,7 @@ class Trial:
         trial_info = {
             "type": self.type,
             "time": self.time,
-            "per": self.per,
+            # "per": self.per,
             "rel": self.rel,
             "feedb": self.feedb,
             "wait": self.wait,

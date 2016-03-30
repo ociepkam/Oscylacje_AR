@@ -16,6 +16,10 @@ class Experiment:
         }
         return info
 
+    def randomize(self):
+        for block in self.list_of_blocks:
+            block.randomize_block()
+
     def save(self):
         info = self.prepare()
         with open(self.name + ".yaml", 'w') as save_file:

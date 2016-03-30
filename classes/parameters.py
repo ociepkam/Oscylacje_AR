@@ -14,6 +14,12 @@ class Instruction_type (Enum):
     image = "image"
 
 
+class Trial_type (Enum):
+    instruction = 'instruction'
+    experiment = 'experiment'
+    training = 'training'
+
+
 class Per(Enum):
     small = (2, 2)
     big = (3, 2)

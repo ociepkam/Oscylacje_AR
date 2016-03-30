@@ -2,12 +2,8 @@ import random
 
 
 class Block:
-    def __init__(self, rand, list_of_experiment_elements):
+    def __init__(self, list_of_experiment_elements):
         self.list_of_experiment_elements = list_of_experiment_elements
-        self.rand = rand
-
-        if self.rand:
-            self.randomize_block()
 
     def randomize_block(self):
         block_trials = [x for x in self.list_of_experiment_elements if x.type == 'trial']
@@ -27,7 +23,6 @@ class Block:
             elements_list.append(element.prepare())
 
         block_info = {
-            "rand": self.rand,
             "experiment_elements": elements_list
         }
         return block_info

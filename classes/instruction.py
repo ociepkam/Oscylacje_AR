@@ -1,10 +1,6 @@
-import yaml
-
-
 class Instruction:
     def __init__(self, file_path, instruction_type, time):
-        with open(file_path, 'r') as instruction_file:
-            self.instruction = yaml.load(instruction_file)
+        self.file_path = file_path
         self.instruction_type = instruction_type
         self.time = time
         self.type = "instruction"
@@ -14,6 +10,6 @@ class Instruction:
             "type": self.type,
             "time": self.time,
             "instruction_type": self.instruction_type,
-            "path": self.instruction
+            "path": self.file_path
         }
         return instruction_info
