@@ -50,6 +50,8 @@ class Trial:
                             self.matrix_d3.return_figure_list(), self.matrix_d4.return_figure_list(),
                             self.matrix_d5.return_figure_list(), self.matrix_d6.return_figure_list()]
         random.shuffle(self.matrix_list)
+        self.matrix_list = [self.matrix_a.return_figure_list(), self.matrix_b.return_figure_list(),
+                            self.matrix_c.return_figure_list()] + self.matrix_list
 
     def create_matrix_a(self):
         matrix_frame_changes_pairs = FRAME_CHANGES_PAIRS
