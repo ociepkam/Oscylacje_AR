@@ -1,6 +1,7 @@
 # Test rozumowania przez analogię
  
 1) Wartości parametrów w pliku xlsx wygenerowanym przez general_experiment.py:
+    
     Każdy wiersz oznacza trial, który zostanie wyświetlony na ekranie
     
     A) BLOCK_NUMBER
