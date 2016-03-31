@@ -2,6 +2,7 @@
  
 1) Wartości parametrów w pliku xlsx wygenerowanym przez general_experiment.py:
     Każdy wiersz oznacza trial, który zostanie wyświetlony na ekranie
+    
     A) BLOCK_NUMBER
     - liczba naturalna dodatnia, która określa do którego bloku należy dany trial
     - bloki zostaną wyświetlone kolejno od najniższego numeru do najwyższego
@@ -49,6 +50,7 @@
     - pierwsza liczba w kolumnie określa ile triali zostało wprowadzonych poprawnie
 
 2) Wartości parametrów w pliku yaml wygenerowanym przez concrete_experiment.py:
+
     - informacje w pliku są podawane zgodnie z kolejnością wyświetlania
     - struktura ma postać drzewiastą. Spis elementów poczynając od najbardziej ogólnych
         * experiment
