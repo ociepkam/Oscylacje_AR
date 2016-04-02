@@ -66,8 +66,10 @@ def generate_trials_gui():
     args = parser.parse_args()
     experiment = []
 
+    name = args.Instruction.split('/')[-1]
+
     for idx in range(args.Number_of_blocks):
-        instruction = [idx+1, Trial_type.instruction.value, args.Instruction_show_time, args.Instruction]
+        instruction = [idx+1, Trial_type.instruction.value, args.Instruction_show_time, name]
         experiment.append(instruction)
 
         for _ in range(args.Number_of_training_trials_in_blocks):
