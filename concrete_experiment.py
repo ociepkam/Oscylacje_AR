@@ -56,7 +56,7 @@ def main():
     for idx in range(len(data)):
         trial_info = data[idx]
         block_number = trial_info['BLOCK_NUMBER']
-        if trial_info['TYPE'] == Trial_type.instruction:
+        if trial_info['TYPE'] == Trial_type.instruction.value:
             if trial_info['TIP'][-3:] == 'txt':
                 instruction_type = Instruction_type.text
             elif trial_info['TIP'][-3:] == 'bmp' or trial_info['TIP'][-3:] == 'jpg':
@@ -64,10 +64,11 @@ def main():
             else:
                 raise AssertionError("wrong instruction file type")
             trial = Instruction(trial_info['TIP'], instruction_type, trial_info['SHOW_TIME'])
-        elif trial_info['TYPE'] == Trial_type.training or trial_info['TYPE'] == Trial_type.experiment:
-            trial = Trial(time=trial_info['SHOW_TIME'], per=Per.small, rel=trial_info['RELATIONS'], feedb=trial_info['FEEDB'], wait=trial_info['WAIT_TIME'],
+        elif trial_info['TYPE'] == Trial_type.training.value or trial_info['TYPE'] == Trial_type.experiment.value:
+            trial = Trial(time=trial_info['SHOW_TIME'], per=Per.small.value, rel=trial_info['RELATIONS'], feedb=trial_info['FEEDB'], wait=trial_info['WAIT_TIME'],
                           exp=trial_info['TYPE'], tip=trial_info.get('TIP'), tip_time=trial_info['TIP_TIME'])
         else:
+            print trial_info['TYPE']
             raise AssertionError("wrong trial type")
 
         experiment.list_of_blocks[block_number - 1].list_of_experiment_elements.append(trial)
