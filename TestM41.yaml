@@ -1,10 +1,5 @@
 list_of_blocks:
 - experiment_elements:
-  - instruction_type: !!python/object/apply:classes.parameters.Instruction_type [
-      text]
-    path: instrukcja.txt
-    time: 5
-    type: instruction
   - exp: experiment
     feedb: 1
     matrix_info:
