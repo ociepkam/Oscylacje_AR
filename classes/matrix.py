@@ -1,6 +1,7 @@
 import random
 import copy
 from parameters import PARAMETERS, PARAMETERS_DICT
+import numpy as np
 
 
 class Matrix:
@@ -23,7 +24,9 @@ class Matrix:
         return all_informations
 
     def shuffle_matrix(self):
-        random.shuffle(self.figures_list)
+        for i in range(0, len(self.figures_list) - 1):
+            pick = random.randint(i + 1, len(self.figures_list) - 1)
+            self.figures_list[i], self.figures_list[pick] = self.figures_list[pick], self.figures_list[i]
 
     def change_figures_b(self, number_of_figures_to_change):
         figures_position = range(len(self.figures_list))
