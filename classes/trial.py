@@ -46,17 +46,26 @@ class Trial:
         self.create_matrix_d4()
         self.create_matrix_d5()
 
-        self.matrix_list = [self.matrix_d1.return_figure_list(), self.matrix_d2.return_figure_list(),
-                            self.matrix_d3.return_figure_list(), self.matrix_d4.return_figure_list(),
-                            self.matrix_d5.return_figure_list(), self.matrix_d6.return_figure_list()]
+        self.matrix_list = [self.matrix_d1, self.matrix_d2, self.matrix_d3,
+                            self.matrix_d4, self.matrix_d5, self.matrix_d6]
+        self.shuffle_all_matrix()
+
         random.shuffle(self.matrix_list)
         self.matrix_list = [self.matrix_a.return_figure_list(), self.matrix_b.return_figure_list(),
-                            self.matrix_c.return_figure_list()] + self.matrix_list
+                            self.matrix_c.return_figure_list()] + [x.return_figure_list() for x in self.matrix_list]
+
+    def shuffle_all_matrix(self):
+        new_figures_positions = list(range(self.figures_list_len))
+        for i in range(0, len(new_figures_positions)-1):
+            pick = random.randint(i+1, len(new_figures_positions)-1)
+            new_figures_positions[i], new_figures_positions[pick] = new_figures_positions[pick], new_figures_positions[i]
+        for matrix in self.matrix_list:
+            matrix.change_figures_positions(new_figures_positions)
 
     def create_matrix_a(self):
-        matrix_frame_changes_pairs = FRAME_CHANGES_PAIRS
-        matrix_brightness_changes_pairs = BRIGHTNESS_CHANGES_PAIRS
-        matrix_rotation_changes_pairs = ROTATION_CHANGES_PAIRS
+        matrix_frame_changes_pairs = copy.deepcopy(FRAME_CHANGES_PAIRS)
+        matrix_brightness_changes_pairs = copy.deepcopy(BRIGHTNESS_CHANGES_PAIRS)
+        matrix_rotation_changes_pairs = copy.deepcopy(ROTATION_CHANGES_PAIRS)
         figures_list = []
         for name in self.figures[:self.figures_list_len]:
             figure_frame = random.choice(matrix_frame_changes_pairs)
@@ -78,16 +87,16 @@ class Trial:
     def create_matrix_b(self):
         self.matrix_b = copy.deepcopy(self.matrix_a)
         self.matrix_b.change_figures_b(self.rel)
-        self.matrix_b.shuffle_matrix()
         for figure in self.matrix_b.figures_list:
             self.list_of_changes.append(figure.elements_changed)
-        random.shuffle(self.list_of_changes)
+        self.matrix_b.shuffle_matrix()
+        # random.shuffle(self.list_of_changes)
         self.matrix_b.name = "B"
 
     def create_matrix_c(self):
-        matrix_frame_changes_pairs = FRAME_CHANGES_PAIRS
-        matrix_brightness_changes_pairs = BRIGHTNESS_CHANGES_PAIRS
-        matrix_rotation_changes_pairs = ROTATION_CHANGES_PAIRS
+        matrix_frame_changes_pairs = copy.deepcopy(FRAME_CHANGES_PAIRS)
+        matrix_brightness_changes_pairs = copy.deepcopy(BRIGHTNESS_CHANGES_PAIRS)
+        matrix_rotation_changes_pairs = copy.deepcopy(ROTATION_CHANGES_PAIRS)
         figures_list_c = []
         for idx, name in enumerate(self.figures[:self.figures_list_len]):
             a_frame_possible_change = self.matrix_a.figures_list[idx].frame_possible_change
@@ -137,7 +146,6 @@ class Trial:
     def create_matrix_d6(self):
         self.matrix_d6 = copy.deepcopy(self.matrix_c)
         self.matrix_d6.name = "D6"
-        self.matrix_d6.shuffle_matrix()
 
     def prepare(self):
         trial_info = {
