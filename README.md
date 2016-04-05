@@ -77,7 +77,7 @@
             + parameters (określa parametry kolejnych figur w macierzy)
         * parameters (figura)
             + brightness: ('white', 'gray', 'slate')
-            + figure (1-16 numery odpowiadają kolejnym figurą opisanym w dokumentacji)
+            + figure (1-20 numery odpowiadają kolejnym figurą opisanym w dokumentacji)
             + frame ('thin', 'narrow', 'wide')
             + rotation (0, 90, 180, 270)
             + elements_changed
