@@ -1,6 +1,6 @@
 from enum import Enum
 
-FIGURES = range(16)
+FIGURES = range(1, 21)
 ROTATION = [0, 90, 180, 270]
 BRIGHTNESS = ['white', 'gray', 'slate']
 FRAME = ['thin', 'narrow', 'wide']
